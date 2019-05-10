@@ -14,12 +14,12 @@
 using namespace std;
 
 typedef	struct{
-	GLubyte	* imageData;	// Image Data (Up To 32 Bits)
-	GLuint	bpp;			// Image Color Depth In Bits Per Pixel
-	GLuint	width;			// Image Width
-	GLuint	height;			// Image Height
-	GLuint	texID;			// Texture ID Used To Select A Texture
-	GLuint	type;			// Image Type (GL_RGB, GL_RGBA)
+	GLubyte	* imageData;	
+	GLuint	bpp;
+	GLuint	width;
+	GLuint	height;
+	GLuint	texID;
+	GLuint	type;
 } Texture;
 
 class Point3{
@@ -83,9 +83,9 @@ public:
 
 class Face{
 public:
-	int		nVerts;
-	VertexID*	vert;
-	Vector3		facenorm;
+	int	nVerts;
+	VertexID*vert;
+	Vector3	facenorm;
 
 	Face(){
 		nVerts = 0;
@@ -1123,7 +1123,7 @@ void mySpecial(int key, int x, int y){
 	glutPostRedisplay();
 }
 void drawAxis(){
-	glColor3f(0, 0, 1);
+	glColor3f(0, 2, 1);
 	glBegin(GL_LINES);
 	glColor3f(1, 0, 0);
 	glVertex3f(0, 0, 0);//x
@@ -1409,24 +1409,6 @@ void drawtayquay_ovan2(){
 
 	glPopMatrix();
 }
-
-void drawTt_1(){
-	glPushMatrix();
-	glRotatef(base.rotateY, 0, 1, 0);
-	glTranslated(0, lenY + 1.1*columnSizeY - (0.005) - 0, 6 * columnSizeZ);
-	glTranslated(0, -(tayquay_ov_len)*(1 - cos(tayquay_ov.rotateZ*PI / 180)), 0);
-	GLfloat amb[] = { 1.0f, 1.0f, 0.0f, 1.0f };
-	GLfloat diff[] = { 0.25f, 0.25f, 0.25f, 1.0f };
-	GLfloat spec[] = { 0.9f, 1.0f, 1.0f, 1.0f };
-	GLfloat shine = 30.0f;
-
-	tt1.setupMaterial(amb, diff, spec, shine);
-	if (bWireFrame)
-		tt1.DrawWireframe();
-	else
-		tt1.Draw();
-	glPopMatrix();
-}
 void draw(){
 	drawBase();
 	drawBase1();
@@ -1492,33 +1474,6 @@ void drawReflect(){
 
 }
 
-void shadowmatrix(float shadowMat[4][4], float groundplane[4], float lightpos[4]){
-	float dot = groundplane[0] * lightpos[0] + groundplane[1] * lightpos[1] + groundplane[2] * lightpos[2] + groundplane[3] * lightpos[3];
-
-	shadowMat[0][0] = dot - lightpos[0] * groundplane[0];
-	shadowMat[1][0] = 0.f - lightpos[0] * groundplane[1];
-	shadowMat[2][0] = 0.f - lightpos[0] * groundplane[2];
-	shadowMat[3][0] = 0.f - lightpos[0] * groundplane[3];
-
-	shadowMat[0][1] = 0.f - lightpos[1] * groundplane[0];
-	shadowMat[1][1] = dot - lightpos[1] * groundplane[1];
-	shadowMat[2][1] = 0.f - lightpos[1] * groundplane[2];
-	shadowMat[3][1] = 0.f - lightpos[1] * groundplane[3];
-
-	shadowMat[0][2] = 0.f - lightpos[2] * groundplane[0];
-	shadowMat[1][2] = 0.f - lightpos[2] * groundplane[1];
-	shadowMat[2][2] = dot - lightpos[2] * groundplane[2];
-	shadowMat[3][2] = 0.f - lightpos[2] * groundplane[3];
-
-	shadowMat[0][3] = 0.f - lightpos[3] * groundplane[0];
-	shadowMat[1][3] = 0.f - lightpos[3] * groundplane[1];
-	shadowMat[2][3] = 0.f - lightpos[3] * groundplane[2];
-	shadowMat[3][3] = dot - lightpos[3] * groundplane[3];
-
-
-}
-
-
 void _4view(){
 	if (!b4View){
 		glViewport(0, 0, screenWidth, screenHeight);
@@ -1564,7 +1519,7 @@ void myDisplay(){
 	glEnable(GL_LIGHT0);
 	glEnable(GL_NORMALIZE);
 
-	if (light2 == true) {  //on light 2rd
+	if (light2 == true) {
 
 		glLightfv(GL_LIGHT1, GL_POSITION, light_position2);
 		glLightfv(GL_LIGHT1, GL_DIFFUSE, lightDiffuse2);
@@ -1581,21 +1536,21 @@ void myDisplay(){
 }
 
 void myInit(){
-	fHalfSize = 3.5;//0.7
+	fHalfSize = 3.5;
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 	glFrontFace(GL_CCW);
 	glEnable(GL_DEPTH_TEST);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(-fHalfSize, fHalfSize, -fHalfSize + 1.5, fHalfSize + 1.5, -1000, 1000);//-2,5
+	glOrtho(-fHalfSize, fHalfSize, -fHalfSize + 1.5, fHalfSize + 1.5, -1000, 1000);
 }
 
 int _tmain(int argc, _TCHAR* argv[]){
-	glutInit(&argc, (char**)argv); //initialize the tool kit
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);//set the display mode
-	glutInitWindowSize(screenWidth, screenHeight); //set window size
-	glutInitWindowPosition(100, 100); // set window position on screen
-	glutCreateWindow("Nguyen Ngoc Chau (1510281)"); // open the screen window
+	glutInit(&argc, (char**)argv); 
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+	glutInitWindowSize(screenWidth, screenHeight);
+	glutInitWindowPosition(100, 100); 
+	glutCreateWindow("Trinh Minh Dung - 1510580");
 
 	cout << "1, 2: Rotate the base" << endl;
 	cout << "3, 4: Rotate the arm" << endl;
@@ -1603,13 +1558,13 @@ int _tmain(int argc, _TCHAR* argv[]){
 	cout << "W, w: Switch between wireframe and solid mode" << endl;
 	cout << "V, v: Switch between 1 and 4 views" << endl;
 	cout << "A, a: Turn on/off animation" << endl;
-	cout << "+   : to increase camera distance" << endl;
-	cout << "-   : to decrease camera distance" << endl;
+	cout << "-   : to increase camera distance" << endl;
+	cout << "+  : to decrease camera distance" << endl;
 	cout << "up arrow  : to increase camera height" << endl;
 	cout << "down arrow: to decrease camera height" << endl;
 	cout << "<-        : to rotate camera clockwise" << endl;
 	cout << "->        : to rotate camera counterclockwise" << endl;
-	base.CreateCylinder(0.1, rCircle - 0.1);
+	base.CreateCylinder(0.3, rCircle - 0.2);
 	base1.CreateCylinder(0.5, rCircle - 0.2);
 	base2.CreateCylinder(0.5, rCircle - 0.3);
 	base3.CreateCylinder(0.15, rCircle + 0.1);
