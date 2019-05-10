@@ -1095,6 +1095,8 @@ Mesh	tt_ov2;
 Mesh	tq_tru; //tay quay
 Mesh	tq_tru1;
 Mesh	tq_tru2;
+Mesh	tq_tru3;
+Mesh	tq_tru4;
 
 
 Mesh	tt2;
@@ -1525,13 +1527,8 @@ void drawTt_ov2(){
 }
 void drawTayquay_tru(){
 	glPushMatrix();
-	//glRotatef(base.rotateY, 0, 1, 0);
-	//glTranslated(0, (-tq_ov_len - tq_ov_R) + 1.1*columnSizeY - (R - r), (5 / 2.0 + 3)*columnSizeZ);
-	//glRotatef(90, 0, 0, 1);
-	//glRotatef(90, 1, 0, 0);
 	glRotatef(tq_ov.rotateZ, 0, 1, 0);
-	/*glTranslated(tq_ov_len, 0, 0);*/
-	glTranslatef(0, 1.12, 0);
+	glTranslatef(0, 1.12, -0.5);
 
 	GLfloat amb[] = { 1.0f, 0.0f, 0.0f, 1.0f };
 	GLfloat diff[] = { 0.67f, 0.66f, 0.66f, 1.0f };
@@ -1547,16 +1544,12 @@ void drawTayquay_tru(){
 }
 void drawTayquay_tru1(){
 	glPushMatrix();
-	//glRotatef(base.rotateY, 0, 1, 0);
-	//glTranslated(0, (-tq_ov_len - tq_ov_R) + 1.1*columnSizeY - (R - r), (5 / 2.0 + 3)*columnSizeZ);
-	glRotatef(90, 0, 0, 1);
 	glTranslatef(-1, 1.12, 0);
-
+	glRotatef(90, 0, 0, 1);
 	GLfloat amb[] = { 1.0f, 0.0f, 0.0f, 1.0f };
 	GLfloat diff[] = { 0.67f, 0.66f, 0.66f, 1.0f };
 	GLfloat spec[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 	GLfloat shine = 100.0f;
-
 	tq_tru1.setupMaterial(amb, diff, spec, shine);
 	if (bWireFrame)
 		tq_tru1.DrawWireframe();
@@ -1566,26 +1559,55 @@ void drawTayquay_tru1(){
 }
 void drawTayquay_tru2(){
 	glPushMatrix();
-	//glRotatef(base.rotateY, 0, 1, 0);
-	//glTranslated(0, (-tq_ov_len - tq_ov_R) + 1.1*columnSizeY - (R - r), (5 / 2.0 + 3)*columnSizeZ);
-	//glRotatef(90, 1, 0, 0);
-	/*glRotatef(tq_ov.rotateZ, 0, 1, 0);*/
-	/*glTranslated(tq_ov_len, 0, 0);*/
-	glRotatef(90, 0, 0, 1);
 	glTranslatef(1, 1.12, 0);
-
+	glRotatef(90, 0, 0, 1);
 	GLfloat amb[] = { 1.0f, 0.0f, 0.0f, 1.0f };
 	GLfloat diff[] = { 0.67f, 0.66f, 0.66f, 1.0f };
 	GLfloat spec[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 	GLfloat shine = 100.0f;
-
 	tq_tru2.setupMaterial(amb, diff, spec, shine);
 	if (bWireFrame)
 		tq_tru2.DrawWireframe();
 	else
 		tq_tru2.Draw();
 	glPopMatrix();
+}void drawTayquay_tru3(){
+	glPushMatrix();
+
+	glTranslatef(-0.3, 1.12, 0);
+	glRotatef(90, 0, 0, 1);
+
+	GLfloat amb[] = { 1.0f, 0.0f, 0.0f, 1.0f };
+	GLfloat diff[] = { 0.67f, 0.66f, 0.66f, 1.0f };
+	GLfloat spec[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	GLfloat shine = 100.0f;
+
+	tq_tru3.setupMaterial(amb, diff, spec, shine);
+	if (bWireFrame)
+		tq_tru3.DrawWireframe();
+	else
+		tq_tru3.Draw();
+	glPopMatrix();
 }
+void drawTayquay_tru4(){
+	glPushMatrix();
+
+	glTranslatef(0.3, 1.12, 0);
+	glRotatef(90, 0, 0, 1);
+
+	GLfloat amb[] = { 1.0f, 0.0f, 0.0f, 1.0f };
+	GLfloat diff[] = { 0.67f, 0.66f, 0.66f, 1.0f };
+	GLfloat spec[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	GLfloat shine = 100.0f;
+
+	tq_tru4.setupMaterial(amb, diff, spec, shine);
+	if (bWireFrame)
+		tq_tru4.DrawWireframe();
+	else
+		tq_tru4.Draw();
+	glPopMatrix();
+}
+
 
 
 void drawTt_1(){
@@ -1779,6 +1801,8 @@ void draw(){
 	drawTayquay_tru();
 	drawTayquay_tru1();
 	drawTayquay_tru2();
+	drawTayquay_tru3();
+	drawTayquay_tru4();
 
 	drawgiado2();
 	drawTayquay_ovan();
@@ -2066,6 +2090,12 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	tq_tru2.CreateCylinder(0.6, tq_ov_R);
 	tq_tru2.CalculateFacesNorm();
+
+	tq_tru3.CreateCylinder(0.6, tq_ov_R);
+	tq_tru3.CalculateFacesNorm();
+
+	tq_tru4.CreateCylinder(0.6, tq_ov_R);
+	tq_tru4.CalculateFacesNorm();
 
 	tt1.CreateCuboid(columnSizeX, lenY, columnSizeZ); //17,16//mat mau do
 	tt1.CalculateFacesNorm();
