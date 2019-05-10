@@ -1056,14 +1056,14 @@ void myKeyboard(unsigned char key, int x, int y){
 		animation = !animation;
 		Timer(0);
 		break;
-	case '+':
+	case '-':
 		camera_dis += 0.2;
 		fHalfSize += 0.02;
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		glOrtho(-fHalfSize, fHalfSize, -fHalfSize + 1.5, fHalfSize + 1.5, -1000, 1000);
 		break;
-	case '-':
+	case '+':
 		camera_dis -= 2;
 		fHalfSize -= 0.02;
 		glMatrixMode(GL_PROJECTION);
@@ -1559,7 +1559,7 @@ int _tmain(int argc, _TCHAR* argv[]){
 	cout << "V, v: Switch between 1 and 4 views" << endl;
 	cout << "A, a: Turn on/off animation" << endl;
 	cout << "-   : to increase camera distance" << endl;
-	cout << "+  : to decrease camera distance" << endl;
+	cout << "+	 : to decrease camera distance" << endl;
 	cout << "up arrow  : to increase camera height" << endl;
 	cout << "down arrow: to decrease camera height" << endl;
 	cout << "<-        : to rotate camera clockwise" << endl;
